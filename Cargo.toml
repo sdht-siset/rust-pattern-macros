@@ -1,0 +1,24 @@
+[package]
+name = "pattern-macros"
+version = "0.1.0"
+edition = "2024"
+description = "Procedural macros for the rust-patterns crate"
+license = "MIT OR Apache-2.0"
+authors = ["Linshan Yang <yanglsh@yeah.net>"]
+repository = "https://github.com/sdht-siset/rust-pattern-macros.git"
+documentation = "https://docs.rs/pattern-macros"
+readme = "README.md"
+keywords = ["macro", "factory", "pattern", "design-patterns"]
+categories = ["development-tools::procedural-macros"]
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = "1.0"
+syn = { version = "2.0", features = ["full", "extra-traits"] }
+quote = "1.0"
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
