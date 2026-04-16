@@ -9,7 +9,7 @@ repository = "https://github.com/sdht-siset/rust-pattern-macros.git"
 documentation = "https://docs.rs/pattern-macros"
 readme = "README.md"
 keywords = ["macro", "factory", "pattern", "design-patterns"]
-categories = ["development-tools::procedural-macros"]
+categories = ["development-tools"]
 
 [lib]
 proc-macro = true
