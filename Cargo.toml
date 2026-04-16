@@ -1,12 +1,12 @@
 [package]
-name = "pattern-macros"
+name = "rust-pattern-macros"
 version = "0.1.0"
 edition = "2024"
 description = "Procedural macros for the rust-patterns crate"
 license = "MIT"
 authors = ["Linshan Yang <yanglsh@yeah.net>"]
 repository = "https://github.com/sdht-siset/rust-pattern-macros.git"
-documentation = "https://docs.rs/pattern-macros"
+documentation = "https://docs.rs/rust-pattern-macros"
 readme = "README.md"
 keywords = ["macro", "factory", "pattern", "design-patterns"]
 categories = ["development-tools"]
