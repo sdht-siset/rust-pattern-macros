@@ -1,8 +1,8 @@
-# pattern-macros
+# rust-pattern-macros
 
-[![Crates.io](https://img.shields.io/crates/v/pattern-macros.svg)](https://crates.io/crates/pattern-macros)
-[![Documentation](https://docs.rs/pattern-macros/badge.svg)](https://docs.rs/pattern-macros)
-[![License](https://img.shields.io/crates/l/pattern-macros.svg)](https://crates.io/crates/pattern-macros)
+[![Crates.io](https://img.shields.io/crates/v/rust-pattern-macros.svg)](https://crates.io/crates/rust-pattern-macros)
+[![Documentation](https://docs.rs/rust-pattern-macros/badge.svg)](https://docs.rs/rust-pattern-macros)
+[![License](https://img.shields.io/crates/l/rust-pattern-macros.svg)](https://crates.io/crates/rust-pattern-macros)
 
 `rust-patterns` 库的过程宏扩展。这个 crate 提供了属性宏来简化 Rust 中设计模式的实现。
 
@@ -12,7 +12,7 @@
 
 ```toml
 [dependencies]
-pattern-macros = "0.1"
+rust-pattern-macros = "0.1"
 rust-patterns = "0.1"  # 生成的代码需要这个依赖
 ```
 
@@ -25,7 +25,7 @@ rust-patterns = "0.1"  # 生成的代码需要这个依赖
 #### 使用方法
 
 ```rust
-use pattern_macros::simple_factory;
+use rust_pattern_macros::simple_factory;
 
 #[simple_factory]
 pub trait MyTrait {
@@ -41,7 +41,7 @@ pub trait MyTrait {
 你也可以指定额外的 trait bound：
 
 ```rust
-use pattern_macros::simple_factory;
+use rust_pattern_macros::simple_factory;
 
 #[simple_factory(Send + Sync)]
 pub trait MyTrait {
@@ -69,13 +69,10 @@ pub fn create(
 
 ## 许可证
 
-本项目采用以下任一许可证：
+本项目采用 MIT 许可证。
 
-- Apache 许可证 2.0 版本 ([LICENSE-APACHE](LICENSE-APACHE) 或 http://www.apache.org/licenses/LICENSE-2.0)
-- MIT 许可证 ([LICENSE-MIT](LICENSE-MIT) 或 http://opensource.org/licenses/MIT)
-
-你可以选择其中一种。
+- MIT 许可证 ([LICENSE](LICENSE) 或 http://opensource.org/licenses/MIT)
 
 ## 贡献
 
-除非你明确声明，否则根据 Apache-2.0 许可证的定义，你提交的任何贡献都将按上述双重许可证授权，无需任何附加条款或条件。
+除非你明确声明，否则根据 MIT 许可证的定义，你提交的任何贡献都将按上述许可证授权，无需任何附加条款或条件。
