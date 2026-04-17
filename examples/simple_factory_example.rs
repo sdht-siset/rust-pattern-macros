@@ -1,8 +1,8 @@
 //! 演示 simple_factory 宏的使用示例
 #![allow(dead_code, unused_variables)]
 
-use rust_pattern_components::{FactoryError, FactoryFallback};
 use rust_pattern_macros::simple_factory;
+use rust_patterns::{FactoryError, FactoryFallback};
 
 // 示例 1: 基本用法 - 为 trait 生成简单工厂
 #[simple_factory]
@@ -150,7 +150,7 @@ fn demonstrate_generated_code() {
     //         strategy: FactoryFallback,
     //     ) -> Result<(&str, Box<dyn Product>), FactoryError> {
     //         use std::sync::LazyLock;
-    //         use rust_pattern_components::{FactoryRegistry, SimpleFactory};
+    //         use rust_patterns::{FactoryRegistry, SimpleFactory};
     //
     //         static FACTORY: LazyLock<SimpleFactory<dyn Product>> =
     //             LazyLock::new(FactoryRegistry::simple_factory);

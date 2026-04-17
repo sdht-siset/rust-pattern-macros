@@ -5,7 +5,12 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://github.com/sdht-siset/rust-pattern-macros/actions/workflows/rust.yml/badge.svg)](https://github.com/sdht-siset/rust-pattern-macros/actions)
 
-`rust-pattern-macros` 是 `rust-pattern-components` 库的过程宏扩展，提供了属性宏来简化 Rust 中设计模式的实现。
+[![Crates.io](https://img.shields.io/crates/v/rust-pattern-macros.svg)](https://crates.io/crates/rust-pattern-macros)
+[![Documentation](https://docs.rs/rust-pattern-macros/badge.svg)](https://docs.rs/rust-pattern-macros)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://github.com/sdht-siset/rust-pattern-macros/actions/workflows/rust.yml/badge.svg)](https://github.com/sdht-siset/rust-pattern-macros/actions)
+
+`rust-pattern-macros` 是 `rust-patterns` 库的过程宏扩展，提供了属性宏来简化 Rust 中设计模式的实现。
 
 ## 特性
 
@@ -20,8 +25,8 @@
 
 ```toml
 [dependencies]
-rust-pattern-components = "0.1"
-rust-pattern-macros = "0.1"
+rust-patterns = "0.1.1"
+rust-pattern-macros = "0.1.2"
 ```
 
 ## 包含的宏
@@ -67,8 +72,8 @@ pub trait Service {
 ```rust
 pub fn create(
     id: &str,
-    strategy: rust_pattern_components::FactoryFallback,
-) -> Result<(&str, Box<dyn Trait>), rust_pattern_components::FactoryError>
+    strategy: rust_patterns::FactoryFallback,
+) -> Result<(&str, Box<dyn Trait>), rust_patterns::FactoryError>
 ```
 
 ### 2. `#[observable]` - 观察者模式
@@ -88,7 +93,7 @@ struct Counter {
 // 手动初始化（需要提供 registry 字段）
 let mut counter = Counter {
     value: 0,
-    registry: rust_pattern_components::ObserverRegistry::new(),
+    registry: rust_patterns::ObserverRegistry::new(),
 };
 
 // 现在可以使用 attach、detach、notify 等方法
@@ -160,7 +165,7 @@ cargo test --test simple_factory_test
 ## 系统要求
 
 - Rust 1.70 或更高版本（需要 `std::sync::LazyLock`）
-- `rust-pattern-components` crate 必须在你的项目中可用
+- `rust-patterns` crate 必须在你的项目中可用
 
 ## 贡献指南
 
@@ -191,7 +196,7 @@ cargo test --test simple_factory_test
 
 ## 相关项目
 
-- [rust-pattern-components](https://github.com/sdht-siset/rust-pattern-components) - 设计模式组件库
+- [rust-patterns](https://github.com/sdht-siset/rust-patterns) - 统一的设计模式库
 - [inventory](https://crates.io/crates/inventory) - 编译时注册系统
 - [thiserror](https://crates.io/crates/thiserror) - 错误处理库
 

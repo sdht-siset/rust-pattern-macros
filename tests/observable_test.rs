@@ -1,8 +1,8 @@
 //! observable 宏的集成测试
 #![allow(dead_code, unused_variables)]
 
-use rust_pattern_components::{Observable, Observer, ObserverRegistry};
 use rust_pattern_macros::observable;
+use rust_patterns::{Observable, Observer, ObserverRegistry};
 use std::sync::Arc;
 
 // 外部模块，用于测试字段可见性
@@ -58,7 +58,7 @@ fn test_observable_macro_basic() {
 fn test_observable_attach_detach() {
     let mut observable = TestObservable {
         data: 0,
-        registry: rust_pattern_components::ObserverRegistry::new(),
+        registry: rust_patterns::ObserverRegistry::new(),
     };
     let observer = Arc::new(TestObserver {
         id: 1,

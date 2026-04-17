@@ -45,10 +45,10 @@ pub fn generate(args: TokenStream, input: TokenStream) -> TokenStream {
             #[inline]
             pub fn create(
                 id: &str,
-                strategy: ::rust_pattern_components::FactoryFallback,
-            ) -> std::result::Result<(&str, Box<#product_type>), ::rust_pattern_components::FactoryError> {
-                static FACTORY: ::std::sync::LazyLock<::rust_pattern_components::SimpleFactory<#product_type>> =
-                    ::std::sync::LazyLock::new(::rust_pattern_components::FactoryRegistry::simple_factory);
+                strategy: ::rust_patterns::FactoryFallback,
+            ) -> std::result::Result<(&str, Box<#product_type>), ::rust_patterns::FactoryError> {
+                static FACTORY: ::std::sync::LazyLock<::rust_patterns::SimpleFactory<#product_type>> =
+                    ::std::sync::LazyLock::new(::rust_patterns::FactoryRegistry::simple_factory);
 
                 FACTORY.create(id, strategy)
             }

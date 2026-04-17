@@ -116,7 +116,7 @@ pub fn generate(args: TokenStream, input: TokenStream) -> TokenStream {
         ident: Some(Ident::new("registry", Span::call_site())),
         colon_token: Some(syn::token::Colon(Span::call_site())),
         ty: syn::parse_str::<Type>(&format!(
-            "::rust_pattern_components::ObserverRegistry<{}>",
+            "::rust_patterns::ObserverRegistry<{}>",
             struct_name
         ))
         .unwrap(),
@@ -151,15 +151,15 @@ pub fn generate(args: TokenStream, input: TokenStream) -> TokenStream {
     let expanded = quote! {
         #input_struct
 
-        impl ::rust_pattern_components::Observable for #struct_name {
+        impl ::rust_patterns::Observable for #struct_name {
             type State = #state_type;
             type Error = #error_type;
 
-            fn attach(&mut self, observer: ::std::sync::Arc<dyn ::rust_pattern_components::Observer<Subject = Self>>) {
+            fn attach(&mut self, observer: ::std::sync::Arc<dyn ::rust_patterns::Observer<Subject = Self>>) {
                 self.registry.attach(observer);
             }
 
-            fn detach(&mut self, observer: ::std::sync::Arc<dyn ::rust_pattern_components::Observer<Subject = Self>>) {
+            fn detach(&mut self, observer: ::std::sync::Arc<dyn ::rust_patterns::Observer<Subject = Self>>) {
                 self.registry.detach(observer);
             }
         }
@@ -169,14 +169,14 @@ pub fn generate(args: TokenStream, input: TokenStream) -> TokenStream {
             ///
             /// 当一个观察者处理更新失败时，立即停止并返回错误。
             pub fn notify(&self, state: &#state_type) -> Result<(), #error_type> {
-                self.registry.notify(state, ::rust_pattern_components::NotifyStrategy::StopOnError)
+                self.registry.notify(state, ::rust_patterns::NotifyStrategy::StopOnError)
             }
 
             /// 通知所有观察者状态变化（使用 IgnoreError 策略）
             ///
             /// 即使某个观察者失败，也继续通知其他观察者。
             pub fn notify_ignore_error(&self, state: &#state_type) -> Result<(), #error_type> {
-                self.registry.notify(state, ::rust_pattern_components::NotifyStrategy::IgnoreError)
+                self.registry.notify(state, ::rust_patterns::NotifyStrategy::IgnoreError)
             }
         }
 

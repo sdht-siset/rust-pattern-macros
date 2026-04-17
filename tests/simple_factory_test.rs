@@ -1,8 +1,8 @@
 //! simple_factory 宏的集成测试
 #![allow(dead_code, unused_variables)]
 
-use rust_pattern_components::{FactoryError, FactoryFallback};
 use rust_pattern_macros::simple_factory;
+use rust_patterns::{FactoryError, FactoryFallback};
 
 // 测试基本功能
 #[simple_factory]

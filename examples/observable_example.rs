@@ -1,8 +1,8 @@
 //! 演示 observable 宏的使用示例
 #![allow(dead_code, unused_variables)]
 
-use rust_pattern_components::{Observable, Observer};
 use rust_pattern_macros::observable;
+use rust_patterns::{Observable, Observer};
 use std::sync::Arc;
 
 // 示例 1: 基本用法
@@ -17,7 +17,7 @@ impl Counter {
     pub fn with_value(value: u64) -> Self {
         Self {
             value,
-            registry: rust_pattern_components::ObserverRegistry::new(),
+            registry: rust_patterns::ObserverRegistry::new(),
         }
     }
 
@@ -90,7 +90,7 @@ fn main() {
     // 测试 Counter
     let mut counter = Counter {
         value: 0,
-        registry: rust_pattern_components::ObserverRegistry::new(),
+        registry: rust_patterns::ObserverRegistry::new(),
     };
     let display = Arc::new(CounterDisplay);
 
@@ -101,7 +101,7 @@ fn main() {
     // 测试 TemperatureSensor
     let mut sensor = TemperatureSensor {
         temperature: 20.0,
-        registry: rust_pattern_components::ObserverRegistry::new(),
+        registry: rust_patterns::ObserverRegistry::new(),
     };
 
     let temp_display = Arc::new(TemperatureObserver);
