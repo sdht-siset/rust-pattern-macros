@@ -1,6 +1,6 @@
 use proc_macro::TokenStream;
-use syn::{ItemTrait, TraitBound, parse_macro_input, punctuated::Punctuated, token::Plus};
 
+mod observable;
 mod simple_factory;
 
 /// 为 trait 生成简单工厂实现的属性宏。
@@ -49,12 +49,43 @@ mod simple_factory;
 /// ```
 #[proc_macro_attribute]
 pub fn simple_factory(args: TokenStream, input: TokenStream) -> TokenStream {
-    let product_trait = parse_macro_input!(input as ItemTrait);
-    let product_bounds = if args.is_empty() {
-        Punctuated::<TraitBound, Plus>::new()
-    } else {
-        parse_macro_input!(args with Punctuated::<TraitBound, Plus>::parse_terminated)
-    };
+    simple_factory::generate(args, input)
+}
 
-    simple_factory::generate(product_trait, product_bounds)
+/// 为结构体自动实现 `Observable` trait 的属性宏。
+///
+/// 此宏应用于结构体定义，会自动：
+/// 1. 添加 `registry: ObserverRegistry<Self>` 字段
+/// 2. 实现 `Observable` trait，包括 `State` 和 `Error` 关联类型
+/// 3. 提供 `attach` 和 `detach` 方法的默认实现
+///
+/// # 使用方法
+///
+/// ```rust,ignore
+/// use pattern_macros::observable;
+///
+/// #[observable(state = u64, error = anyhow::Error)]
+/// struct TemperatureSensor {
+///     temperature: f64,
+/// }
+/// ```
+///
+/// 也可以使用自定义的错误类型：
+///
+/// ```rust,ignore
+/// #[observable(state = String, error = std::io::Error)]
+/// struct Logger {
+///     log_level: u8,
+/// }
+/// ```
+///
+/// # 生成的内容
+///
+/// 宏会生成以下内容：
+/// 1. 添加 `registry: ObserverRegistry<Self>` 字段到结构体
+/// 2. 实现 `Observable` trait，设置 `State` 和 `Error` 关联类型
+/// 3. 实现 `attach` 和 `detach` 方法，委托给内部的 `registry`
+#[proc_macro_attribute]
+pub fn observable(args: TokenStream, input: TokenStream) -> TokenStream {
+    observable::generate(args, input)
 }
