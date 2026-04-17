@@ -1,7 +1,7 @@
 use proc_macro::TokenStream;
 use proc_macro2::Span;
 use quote::quote;
-use syn::{Field, Fields, Ident, ItemStruct, Type, parse_macro_input};
+use syn::{parse_macro_input, Field, Fields, Ident, ItemStruct, Type};
 
 /// 解析 observable 宏的参数
 ///
@@ -169,14 +169,14 @@ pub fn generate(args: TokenStream, input: TokenStream) -> TokenStream {
             ///
             /// 当一个观察者处理更新失败时，立即停止并返回错误。
             pub fn notify(&self, state: &#state_type) -> Result<(), #error_type> {
-                self.registry.notify(state, ::rust_patterns::NotifyStrategy::StopOnError)
+                self.registry.notify(state)
             }
 
             /// 通知所有观察者状态变化（使用 IgnoreError 策略）
             ///
             /// 即使某个观察者失败，也继续通知其他观察者。
-            pub fn notify_ignore_error(&self, state: &#state_type) -> Result<(), #error_type> {
-                self.registry.notify(state, ::rust_patterns::NotifyStrategy::IgnoreError)
+            pub fn notify_ignore_error(&self, state: &#state_type) {
+                self.registry.notify_ignore_error(state)
             }
         }
 
