@@ -96,8 +96,7 @@ fn test_observable_notify_ignore_error() {
     };
 
     // 测试忽略错误的通知方法
-    let result = observable.notify_ignore_error(&42);
-    assert!(result.is_ok());
+    observable.notify_ignore_error(&42);
 
     println!("Notify ignore error test passed");
 }

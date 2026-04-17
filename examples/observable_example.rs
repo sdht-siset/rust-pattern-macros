@@ -112,7 +112,7 @@ fn main() {
 
     // 测试通知策略
     sensor.temperature = 30.0;
-    let _ = sensor.notify_ignore_error(&sensor.temperature); // 输出: Temperature: 30.0°C
+    sensor.notify_ignore_error(&sensor.temperature); // 输出: Temperature: 30.0°C
 
     println!("All examples completed successfully!");
 }

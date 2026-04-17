@@ -26,7 +26,7 @@
 ```toml
 [dependencies]
 rust-patterns = "0.1.1"
-rust-pattern-macros = "0.1.2"
+rust-pattern-macros = "0.1.3"
 ```
 
 ## 包含的宏
