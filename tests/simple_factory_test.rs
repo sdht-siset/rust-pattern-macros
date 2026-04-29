@@ -61,8 +61,8 @@ fn test_simple_factory_method_signature() {
     // 直接调用 create 方法，如果编译通过则签名正确
     let _result = TestProductFactory::create("test", FactoryFallback::NoFallback);
 
-    // 验证返回类型
-    fn assert_return_type<T: ?Sized>(_result: Result<(&str, Box<T>), FactoryError>) {}
+    // 验证返回类型为 Result<Box<T>, FactoryError>
+    fn assert_return_type<T: ?Sized>(_result: Result<Box<T>, FactoryError>) {}
 
     // 由于工厂未注册，我们只能验证错误类型
     match TestProductFactory::create("test", FactoryFallback::NoFallback) {

@@ -44,9 +44,9 @@ pub fn generate(args: TokenStream, input: TokenStream) -> TokenStream {
         impl #factory_ident {
             #[inline]
             pub fn create(
-                id: &str,
+                id: impl AsRef<str>,
                 strategy: ::rust_patterns::FactoryFallback,
-            ) -> std::result::Result<(&str, Box<#product_type>), ::rust_patterns::FactoryError> {
+            ) -> std::result::Result<Box<#product_type>, ::rust_patterns::FactoryError> {
                 static FACTORY: ::std::sync::LazyLock<::rust_patterns::SimpleFactory<#product_type>> =
                     ::std::sync::LazyLock::new(::rust_patterns::FactoryRegistry::simple_factory);
 

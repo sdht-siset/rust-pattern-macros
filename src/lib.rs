@@ -43,9 +43,9 @@ mod simple_factory;
 /// `create` 方法签名：
 /// ```rust,ignore
 /// pub fn create(
-///     id: &str,
+///     id: impl AsRef<str>,
 ///     strategy: rust_patterns::FactoryFallback,
-/// ) -> Result<(&str, Box<dyn MyTrait>), rust_patterns::FactoryError>
+/// ) -> Result<Box<dyn MyTrait>, rust_patterns::FactoryError>
 /// ```
 #[proc_macro_attribute]
 pub fn simple_factory(args: TokenStream, input: TokenStream) -> TokenStream {

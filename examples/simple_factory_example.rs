@@ -73,11 +73,10 @@ fn main() {
     // 在实际使用中，需要先注册工厂
 
     match ProductFactory::create("product_a", FactoryFallback::NoFallback) {
-        Ok((id, product)) => {
+        Ok(product) => {
             println!(
-                "   Created product: {}, ID: {}, Price: ${:.2}",
+                "   Created product: {}, Price: ${:.2}",
                 product.name(),
-                id,
                 product.price()
             );
         }
@@ -96,8 +95,8 @@ fn main() {
     println!("\n2. Testing fallback strategies:");
 
     match ProductFactory::create("", FactoryFallback::First) {
-        Ok((id, product)) => {
-            println!("   First fallback created: {}, ID: {}", product.name(), id);
+        Ok(product) => {
+            println!("   First fallback created: {}", product.name());
         }
         Err(FactoryError::NoFactoriesAvailable) => {
             println!("   No factories available (expected - factories not registered)");
@@ -111,7 +110,7 @@ fn main() {
     println!("\n3. Testing Service factory with Send + Sync bounds:");
 
     match ServiceFactory::create("service_impl", FactoryFallback::NoFallback) {
-        Ok((id, service)) => match service.execute() {
+        Ok(service) => match service.execute() {
             Ok(result) => println!("   Service executed: {}", result),
             Err(e) => println!("   Service error: {}", e),
         },
@@ -146,9 +145,9 @@ fn demonstrate_generated_code() {
     //
     // impl ProductFactory {
     //     pub fn create(
-    //         id: &str,
+    //         id: impl AsRef<str>,
     //         strategy: FactoryFallback,
-    //     ) -> Result<(&str, Box<dyn Product>), FactoryError> {
+    //     ) -> Result<Box<dyn Product>, FactoryError> {
     //         use std::sync::LazyLock;
     //         use rust_patterns::{FactoryRegistry, SimpleFactory};
     //

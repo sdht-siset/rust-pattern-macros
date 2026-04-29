@@ -2,7 +2,7 @@
 #![allow(dead_code, unused_variables)]
 
 use rust_pattern_macros::observable;
-use rust_patterns::{Observable, Observer};
+use rust_patterns::{Observable, Observer, ObserverRegistry};
 use std::sync::Arc;
 
 // 示例 1: 基本用法
@@ -17,7 +17,7 @@ impl Counter {
     pub fn with_value(value: u64) -> Self {
         Self {
             value,
-            registry: rust_patterns::ObserverRegistry::new(),
+            registry: ObserverRegistry::new(),
         }
     }
 
@@ -101,7 +101,7 @@ fn main() {
     // 测试 TemperatureSensor
     let mut sensor = TemperatureSensor {
         temperature: 20.0,
-        registry: rust_patterns::ObserverRegistry::new(),
+        registry: ObserverRegistry::new(),
     };
 
     let temp_display = Arc::new(TemperatureObserver);

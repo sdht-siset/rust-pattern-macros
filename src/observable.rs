@@ -1,7 +1,7 @@
 use proc_macro::TokenStream;
 use proc_macro2::Span;
 use quote::quote;
-use syn::{parse_macro_input, Field, Fields, Ident, ItemStruct, Type};
+use syn::{Field, FieldMutability, Fields, Ident, ItemStruct, Type, Visibility, parse_macro_input};
 
 /// 解析 observable 宏的参数
 ///
@@ -111,8 +111,8 @@ pub fn generate(args: TokenStream, input: TokenStream) -> TokenStream {
     // 添加 registry 字段，使用结构体的可见性
     let registry_field = Field {
         attrs: Vec::new(),
-        vis: input_struct.vis.clone(),
-        mutability: syn::FieldMutability::None,
+        vis: Visibility::Inherited,
+        mutability: FieldMutability::None,
         ident: Some(Ident::new("registry", Span::call_site())),
         colon_token: Some(syn::token::Colon(Span::call_site())),
         ty: syn::parse_str::<Type>(&format!(
@@ -165,17 +165,19 @@ pub fn generate(args: TokenStream, input: TokenStream) -> TokenStream {
         }
 
         impl #struct_name {
-            /// 通知所有观察者状态变化（使用 StopOnError 策略）
+            /// 通知所有观察者状态变化
             ///
             /// 当一个观察者处理更新失败时，立即停止并返回错误。
-            pub fn notify(&self, state: &#state_type) -> Result<(), #error_type> {
+            #[inline]
+            fn notify(&self, state: &#state_type) -> Result<(), #error_type> {
                 self.registry.notify(state)
             }
 
-            /// 通知所有观察者状态变化（使用 IgnoreError 策略）
+            /// 通知所有观察者状态变化
             ///
             /// 即使某个观察者失败，也继续通知其他观察者。
-            pub fn notify_ignore_error(&self, state: &#state_type) {
+            #[inline]
+            fn notify_ignore_error(&self, state: &#state_type) {
                 self.registry.notify_ignore_error(state)
             }
         }
